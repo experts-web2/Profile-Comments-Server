@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { MBTI, ENNEAGRAM } = require("../constants/index");
 
 const profileSchema = new mongoose.Schema({
   name: {
@@ -11,37 +12,30 @@ const profileSchema = new mongoose.Schema({
   },
   mbti: {
     type: String,
-    required: true,
+    enum: MBTI,
   },
   enneagram: {
     type: String,
-    required: true,
+    enum: ENNEAGRAM,
   },
   variant: {
     type: String,
-    required: true,
   },
   tritype: {
     type: String,
-    required: true,
   },
   socionics: {
     type: String,
-    required: true,
   },
   sloan: {
     type: String,
-    required: true,
   },
   psyche: {
     type: String,
-    required: true,
   },
   image: {
     type: String,
-    required: true,
   },
 });
 
-const Profile = mongoose.model("Profile", profileSchema);
-module.exports = Profile;
+module.exports = mongoose.model("Profile", profileSchema);

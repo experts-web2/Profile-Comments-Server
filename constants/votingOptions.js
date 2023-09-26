@@ -1,4 +1,4 @@
-exports.MBTI = [
+const MBTI = [
   "INFP",
   "INFJ",
   "ENFP",
@@ -17,7 +17,7 @@ exports.MBTI = [
   "ESTJ",
 ];
 
-exports.ENNEAGRAM = [
+const ENNEAGRAM = [
   "1w2",
   "2w3",
   "3w2",
@@ -36,7 +36,7 @@ exports.ENNEAGRAM = [
   "9w1",
 ];
 
-exports.ZODIAC = [
+const ZODIAC = [
   "Aries",
   "Taurus",
   "Gemini",
@@ -50,3 +50,6 @@ exports.ZODIAC = [
   "Aquarius",
   "Pisces",
 ];
+
+
+module.exports = { ZODIAC, ENNEAGRAM, MBTI }

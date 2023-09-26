@@ -1,5 +1,11 @@
-exports.STATUS = require("./status");
-exports.MESSAGE = require("./message");
-exports.MBTI = require("./votingOptions");
-exports.ENNEAGRAM = require("./votingOptions");
-exports.ZODIAC = require("./votingOptions");
+const { STATUS, STATUS_CODE } = require("./status");
+const MESSAGE = require("./message");
+const { ZODIAC, ENNEAGRAM, MBTI } = require("./votingOptions");
+module.exports = {
+  MBTI,
+  ENNEAGRAM,
+  ZODIAC,
+  MESSAGE,
+  STATUS,
+  STATUS_CODE
+};

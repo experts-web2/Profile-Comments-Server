@@ -1,8 +1,8 @@
 const MESSAGE = {
-  CREATED: "created successfully",
+  CREATED: "Created successfully",
   UPDATED: "Updated Successfully",
-  NOT_FOUND: "Profile not found",
+  NOT_FOUND: "Not found",
   SERVER_ERROR: "Internal Server Error",
+  SERVER_CANNOT_PROCESS: "Server cannot process your request missing something"
 };
-
 module.exports = MESSAGE;

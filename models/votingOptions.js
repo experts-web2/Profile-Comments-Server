@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { MBTI, ENNEAGRAM, ZODIAC } = require("../constants/index");
+const { MBTI, ENNEAGRAM, ZODIAC } = require("../constants");
 
 const votingOptionsSchema = new mongoose.Schema({
   MBTI: {
