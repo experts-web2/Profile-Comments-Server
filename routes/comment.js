@@ -83,14 +83,15 @@ module.exports = function () {
       }
       if (filter) {
         if (filter === FILTER.ALL) {
-          return;
+          query = {};
+        }else{
+          query = {
+            [`personalityVotes.${filter}`]: {
+              $exists: true,
+              $ne: ''
+            }
+          };
         }
-        query = {
-          [`personalityVotes.${filter}`]: {
-            $exists: true,
-            $ne: ''
-          }
-        };
       }
       const profile = await Comment.find(query).sort(sortOptions);
       res.status(STATUS_CODE.SUCCESS).send({

@@ -7,7 +7,6 @@ const startDatabase = async () => {
   await mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'testingDb'
   }).then((db) => {
     console.log("Database Instance Connected URL:", db.connections[0]._connectionString)
   })

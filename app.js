@@ -22,3 +22,4 @@ startDatabase(); // Start the database
 // start server
 const server = app.listen(port);
 console.log("Express started. Listening on %s", port);
+module.exports = app;
