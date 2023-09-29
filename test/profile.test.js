@@ -28,9 +28,9 @@ describe('Profile Routes', async () => {
         const response = await request(app)
             .post('/api/profile/add')
             .send(invalidData);
-        expect(response.status).to.equal(500);
-        expect(response.body.status).to.equal('error');
-        expect(response.body.message).to.equal('Internal Server Error');
+            expect(response.status).to.equal(400);
+            expect(response.body.status).to.equal('error');
+            expect(response.body.message).to.equal('Server cannot process your request missing something');
     });
 
     it('should return user by id', async () => {

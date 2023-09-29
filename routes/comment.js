@@ -3,16 +3,11 @@ const express = require("express");
 const router = express.Router();
 const Comment = require("../models/comment");
 const { MESSAGE, STATUS, STATUS_CODE, FILTER } = require("../constants");
+const { validateRequestBody } = require('../middleware');
 
 module.exports = function () {
   // Add New Comment
-  router.post("/add", async function (req, res, next) {
-    if (!req && !req.body) {
-      return res.status(STATUS_CODE.SERVER_CANNOT_PROCESS).json({
-        status: STATUS.ERROR,
-        message: MESSAGE.SERVER_CANNOT_PROCESS,
-      });
-    }
+  router.post("/add", validateRequestBody, async function (req, res) {
     try {
       const result = await new Comment(req.body).save();
       res.status(STATUS_CODE.CREATED).send({
@@ -30,15 +25,9 @@ module.exports = function () {
   });
 
   //Add Like or Unlike on the Post
-  router.post("/like", async function (req, res, next) {
+  router.post("/like", validateRequestBody, async function (req, res) {
     try {
       const { comment_id, increment } = req.body;
-      if (!comment_id) {
-        return res.status(STATUS_CODE.SERVER_CANNOT_PROCESS).json({
-          status: STATUS.ERROR,
-          message: MESSAGE.SERVER_CANNOT_PROCESS,
-        });
-      }
       const comment = await Comment.findById(comment_id);
       if (!comment) {
         return res.status(STATUS_CODE.NOT_FOUND).send({
@@ -49,12 +38,9 @@ module.exports = function () {
       if (increment) {
         comment.likes += 1;
       } else {
-        if (comment.likes > 0) {
-          comment.likes -= 1;
-        } else {
-          comment.likes = 0;
-        }
+        comment.likes = Math.max(comment.likes - 1, 0);
       }
+
       const updatedComment = await comment.save();
       res.status(STATUS_CODE.SUCCESS).send({
         status: STATUS.SUCCESS,
@@ -71,7 +57,7 @@ module.exports = function () {
   });
 
   // Get Comments By Sort, Filter or All
-  router.post("/all", async function (req, res, next) {
+  router.post("/all", validateRequestBody, async function (req, res) {
     try {
       let query = {};
       const { sort, filter } = req.body;
@@ -84,7 +70,7 @@ module.exports = function () {
       if (filter) {
         if (filter === FILTER.ALL) {
           query = {};
-        }else{
+        } else {
           query = {
             [`personalityVotes.${filter}`]: {
               $exists: true,

@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 3000;
-const { startDatabase, stopDatabase } = require("./setup");
+const { startDatabase } = require("./setup");
 
 // set the view engine to ejs
 app.set("view engine", "ejs");

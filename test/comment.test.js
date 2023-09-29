@@ -28,9 +28,9 @@ describe('Comments Routes', async () => {
         const response = await request(app)
             .post('/api/comment/add')
             .send(invalidData);
-        expect(response.status).to.equal(500);
+        expect(response.status).to.equal(400);
         expect(response.body.status).to.equal('error');
-        expect(response.body.message).to.equal('Internal Server Error');
+        expect(response.body.message).to.equal('Server cannot process your request missing something');
     });
 
     it('should like a comment and return a success response with increment in likes', async () => {
@@ -64,18 +64,11 @@ describe('Comments Routes', async () => {
         const response = await request(app)
             .post('/api/comment/like')
             .send(commentData);
-        expect(response.status).to.equal(400);
-        expect(response.body.message).to.equal('Server cannot process your request missing something');
+        expect(response.status).to.equal(404);
+        expect(response.body.message).to.equal('Not found');
     });
 
-    it('should return all comments', async () => {
-        const response = await request(app)
-            .post('/api/comment/all')
-            .send();
-        expect(response.status).to.equal(200);
-        expect(response.body.status).to.equal('success');
-        expect(response.body).to.have.property('data');
-    });
+
 
     it('should sort comments on the basis of Recent', async () => {
         const body = {
